@@ -14,8 +14,19 @@ function linkedList(headNode, tailNode) {
     const toString = function() {
         runLinkedList(this.head)
     }
+    const size = function() {
+        let i = 0;
+        function count(node = this.head){
+            i++
+            if(node.next === null) {
+                return console.log(i)
+            }
+            count(node.next)
+        }
+        count.call(this)
+    }
     
-    return {head, tail, append, prepend, toString}
+    return {head, tail, append, prepend, size, toString}
 }
 
 // make a factory function called node
@@ -37,6 +48,7 @@ ourList.append('Dexter')
 ourList.append('Better Call Saul')
 ourList.prepend('Friends')
 ourList.toString()
+ourList.size();
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
