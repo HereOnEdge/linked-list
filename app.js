@@ -10,9 +10,12 @@ function linkedList(headNode, tailNode) {
     const prepend = function(value) {
         const listNode = node(value, this.head)
         this.head = listNode
+    };
+    const toString = function() {
+        runLinkedList(this.head)
     }
-
-    return {head, tail, append, prepend}
+    
+    return {head, tail, append, prepend, toString}
 }
 
 // make a factory function called node
@@ -33,6 +36,7 @@ let ourList = linkedList(headNode, tailNode)
 ourList.append('Dexter')
 ourList.append('Better Call Saul')
 ourList.prepend('Friends')
+ourList.toString()
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
@@ -42,5 +46,3 @@ function runLinkedList(node) {
     runLinkedList(node.next)
     
 }
-
-runLinkedList(ourList.head)
