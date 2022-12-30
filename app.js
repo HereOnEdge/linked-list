@@ -6,9 +6,13 @@ function linkedList(headNode, tailNode) {
         const listNode = node(value, null)
         this.tail.next = listNode;
         this.tail = listNode;
-    } 
+    };
+    const prepend = function(value) {
+        const listNode = node(value, this.head)
+        this.head = listNode
+    }
 
-    return {head, tail, append}
+    return {head, tail, append, prepend}
 }
 
 // make a factory function called node
@@ -28,6 +32,7 @@ let headNode = node('Sopranos', item)
 let ourList = linkedList(headNode, tailNode)
 ourList.append('Dexter')
 ourList.append('Better Call Saul')
+ourList.prepend('Friends')
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
