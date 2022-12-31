@@ -3,26 +3,31 @@ function linkedList(headNode, tailNode) {
     const head = headNode;
     const tail = tailNode;
     
+    // append function, gets a value and creates a new Node with the given value and appeands the node to end of the list
     const append = function(value) {
-        const listNode = node(value, null)
-        this.tail.next = listNode;
-        this.tail = listNode;
+        const newNode = node(value, null)
+        this.tail.next = newNode;
+        this.tail = newNode;
     };
 
+    // prepend function, gets a value and creates a new Node and appeands it to the start of list
     const prepend = function(value) {
-        const listNode = node(value, this.head)
-        this.head = listNode
+        const newNode = node(value, this.head)
+        this.head = newNode
     };
 
+    // toString function, console.log's the entire list one by one
     const toString = function() {
         runLinkedList(this.head)
     }
     
+    // size function, returns a number that is the length of the list. starting at index 1
     const size = function() {
         const countObject = count.call(this)
         return countObject.i
     }
     
+    // function at, gets an index and returns the value of the given index inside the list. returns an error if index is not correct
     const at = function(index) {
         if(index <= 0) {
             return console.log(`no Node here. list index starts at 1`)
@@ -34,6 +39,7 @@ function linkedList(headNode, tailNode) {
         return console.log(data.node.value())
     }
 
+    // function pop, removes the last of the list
     const pop = function() {
         const listSize = size.call(this)
         const lastNodeIndex = listSize - 1;
@@ -42,6 +48,7 @@ function linkedList(headNode, tailNode) {
         lastNode.next = null;
     }
 
+    // function contains, gets a value and returns true if the value is found inside the list. returns false if value is not found
     const contains = function(defaultValue) {
         const value = defaultValue.toLowerCase();
         const data = count.call(this, undefined, value);
@@ -50,6 +57,7 @@ function linkedList(headNode, tailNode) {
         return lowerCaseValue === value ? true : false
     }
     
+    // function find, gets a value and returns the index of the value, returns null if the value is not found
     const find = function(defaultValue) {
         const value = defaultValue.toLowerCase();
         const data = count.call(this, undefined, value);
@@ -58,6 +66,7 @@ function linkedList(headNode, tailNode) {
         return lowerCaseValue === value ? data.i : null
     }
 
+    // function inserAt, gets a value and an index and creates a new Node with the given value and insrets the Node at the given index
     const insertAt = function(value, index) {
         index = index - 1
         const data = count.call(this, index)
@@ -65,6 +74,7 @@ function linkedList(headNode, tailNode) {
         data.node.next = newNode
     }
     
+    // dunction removeAt, gets an index and removes the Node inside the list at the given index
     const removeAt = function(index) {
         index = index - 1
         const data = count.call(this, index)
@@ -77,7 +87,7 @@ function linkedList(headNode, tailNode) {
     return {head, tail, append, prepend, size, toString, at, pop, contains, find, insertAt, removeAt}
 }
 
-// make a factory function called node
+// make a factory function called node to create a new Node
 function node(nodeData, nextNode) {
     let value = function() {
         return nodeData
@@ -87,26 +97,7 @@ function node(nodeData, nextNode) {
     return {value, next}
 }
 
-let tailNode = node('Game of Thrones', null)
-let item = node('Breaking Bad', tailNode)
-let headNode = node('Sopranos', item)
 
-let ourList = linkedList(headNode, tailNode)
-ourList.append('Dexter')
-ourList.append('Better Call Saul')
-ourList.prepend('Friends')
-ourList.toString()
-console.log(ourList.size());
-ourList.at(2)
-ourList.pop()
-console.log(ourList.size())
-console.log(ourList.contains('breaking bad'))
-console.log(ourList.find('game of thrones'))
-ourList.insertAt('Rick And Morty', 4)
-ourList.toString()
-console.log(ourList.find('game of thrones'))
-ourList.removeAt(3)
-ourList.toString()
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
@@ -117,7 +108,7 @@ function runLinkedList(node) {
     
 }
 
-// make a function to count count items insise the list
+// make a function to count items insise the list
 function count(ind, val, n = this.head){
     let i = 0;
     function __count(node = n, value = val, index = ind){
@@ -131,3 +122,14 @@ function count(ind, val, n = this.head){
     return __count(); 
     
 }
+
+// run the list
+let tailNode = node('Breaking Bad', null)
+let headNode = node('Sopranos', tailNode)
+let ourList = linkedList(headNode, tailNode)
+
+// test list functions
+ourList.append('Dexter')
+ourList.prepend('Friends')
+ourList.toString()
+console.log(ourList.size())
