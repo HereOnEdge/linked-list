@@ -57,8 +57,15 @@ function linkedList(headNode, tailNode) {
         const lowerCaseValue = recievedValue.toLowerCase();
         return lowerCaseValue === value ? data.i : null
     }
+
+    const insertAt = function(value, index) {
+        index = index - 1
+        const data = count.call(this, index)
+        const newNode = node(value, data.node.next)
+        data.node.next = newNode
+    }
     
-    return {head, tail, append, prepend, size, toString, at, pop, contains, find}
+    return {head, tail, append, prepend, size, toString, at, pop, contains, find, insertAt}
 }
 
 // make a factory function called node
@@ -85,7 +92,10 @@ ourList.at(2)
 ourList.pop()
 console.log(ourList.size())
 console.log(ourList.contains('breaking bad'))
-console.log(ourList.find('breaking bad'))
+console.log(ourList.find('game of thrones'))
+ourList.insertAt('Rick And Morty', 4)
+ourList.toString()
+console.log(ourList.find('game of thrones'))
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
