@@ -23,7 +23,18 @@ function linkedList(headNode, tailNode) {
         return console.log(countObject.i)
     }
     
-    return {head, tail, append, prepend, size, toString}
+    const at = function(index) {
+        if(index <= 0) {
+            return console.log(`no Node here. list index starts at 1`)
+        }
+        const data = count.call(this, index)
+        if(data.i < index) {
+            return console.log(`your list does not have that much items in it. last index is ${data.i}`)
+        }
+        return console.log(data.node.value())
+    }
+
+    return {head, tail, append, prepend, size, toString, at}
 }
 
 // make a factory function called node
@@ -46,6 +57,7 @@ ourList.append('Better Call Saul')
 ourList.prepend('Friends')
 ourList.toString()
 ourList.size();
+ourList.at(0)
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
