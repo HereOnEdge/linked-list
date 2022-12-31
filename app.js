@@ -41,7 +41,16 @@ function linkedList(headNode, tailNode) {
         const lastNode = data.node;
         lastNode.next = null;
     }
-    return {head, tail, append, prepend, size, toString, at, pop}
+
+    const contains = function(defaultValue) {
+        const value = defaultValue.toLowerCase();
+        const data = count.call(this, undefined, value);
+        const recievedValue = data.node.value();
+        const lowerCaseValue = recievedValue.toLowerCase();
+        return lowerCaseValue === value ? true : false
+    }
+    
+    return {head, tail, append, prepend, size, toString, at, pop, contains}
 }
 
 // make a factory function called node
@@ -67,10 +76,7 @@ console.log(ourList.size());
 ourList.at(2)
 ourList.pop()
 console.log(ourList.size())
-ourList.pop()
-ourList.at(5)
-ourList.at(4)
-console.log(ourList.size())
+console.log(ourList.contains('breaking bad'))
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
     console.log(`data = ${node.value()}`)
@@ -82,11 +88,12 @@ function runLinkedList(node) {
 }
 
 // make a function to count count items insise the list
-function count(ind, n = this.head){
+function count(ind, val, n = this.head){
     let i = 0;
-    function __count(node = n, index = ind){
+    function __count(node = n, value = val, index = ind){
         i++
-        if(node.next === null || i === index) {
+        let nodeValue = node.value()
+        if(node.next === null || i === index || nodeValue.toLowerCase() === value) {
             return {i, node}
         }
         return __count(node.next, index)
