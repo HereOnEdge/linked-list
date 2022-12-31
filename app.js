@@ -2,28 +2,25 @@
 function linkedList(headNode, tailNode) {
     const head = headNode;
     const tail = tailNode;
+    
     const append = function(value) {
         const listNode = node(value, null)
         this.tail.next = listNode;
         this.tail = listNode;
     };
+
     const prepend = function(value) {
         const listNode = node(value, this.head)
         this.head = listNode
     };
+
     const toString = function() {
         runLinkedList(this.head)
     }
+    
     const size = function() {
-        let i = 0;
-        function count(node = this.head){
-            i++
-            if(node.next === null) {
-                return console.log(i)
-            }
-            count(node.next)
-        }
-        count.call(this)
+        const countObject = count.call(this)
+        return console.log(countObject.i)
     }
     
     return {head, tail, append, prepend, size, toString}
@@ -56,5 +53,19 @@ function runLinkedList(node) {
         return
     }
     runLinkedList(node.next)
+    
+}
+
+// make a function to count count items insise the list
+function count(ind, n = this.head){
+    let i = 0;
+    function __count(node = n, index = ind){
+        i++
+        if(node.next === null || i === index) {
+            return {i, node}
+        }
+        return __count(node.next, index)
+    };
+    return __count(); 
     
 }
