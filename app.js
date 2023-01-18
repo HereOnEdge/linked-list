@@ -67,12 +67,10 @@ function linkedList(headNode, tailNode = null) {
   };
 
   // function find, gets a value and returns the node of the given value, returns null if the value is not found
-  const find = function (defaultValue) {
-    const value = defaultValue.toLowerCase();
+  const find = function (value) {
     const data = count.call(this, undefined, value);
     const recievedValue = data.node.value();
-    const lowerCaseValue = recievedValue.toLowerCase();
-    return lowerCaseValue === value ? data.node : null;
+    return recievedValue === value ? data.node : null;
   };
 
   // function inserAt, gets a value and an index and creates a new Node with the given value and insrets the Node at the given index
@@ -137,11 +135,7 @@ function count(ind, val, n = this.head) {
   function __count(node = n, value = val, index = ind) {
     i++;
     let nodeValue = node.value();
-    if (
-      node.next === null ||
-      i === index ||
-      nodeValue.toLowerCase() === value
-    ) {
+    if (node.next === null || i === index || nodeValue === value) {
       return { i, node };
     }
     return __count(node.next, index);
@@ -149,15 +143,4 @@ function count(ind, val, n = this.head) {
   return __count();
 }
 
-// run the list
-// let tailNode = node("Breaking Bad", null, headNode);
-let headNode = node("Sopranos", null, null);
-let ourList = linkedList(headNode);
-
-// test list functions
-ourList.append("Dexter");
-ourList.prepend("Friends");
-let myNode = ourList.find("dexter");
-console.log(myNode.next.value());
-console.log(myNode.back.value());
-console.log(ourList.size());
+export { node, linkedList };
