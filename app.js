@@ -73,6 +73,13 @@ function linkedList(headNode, tailNode = null) {
     return recievedValue === value ? data.node : null;
   };
 
+  // function findIndex, gets a value and returns the index of the given value inside the linkedList, returns null if the value is not found
+  const findIndex = function (value) {
+    const data = count.call(this, undefined, value);
+    const recievedValue = data.node.value();
+    const recievedIndex = data.i;
+    return recievedValue === value ? recievedIndex : null;
+  };
   // function inserAt, gets a value and an index and creates a new Node with the given value and insrets the Node at the given index
   const insertAt = function (value, index) {
     index = index - 1;
