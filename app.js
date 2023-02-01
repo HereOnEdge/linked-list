@@ -113,6 +113,7 @@ function linkedList(headNode, tailNode = null) {
     find,
     insertAt,
     removeAt,
+    findIndex,
   };
 }
 
