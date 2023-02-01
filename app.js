@@ -59,10 +59,16 @@ function linkedList(headNode, tailNode = null) {
 
   // function contains, gets a value and returns true if the value is found inside the list. returns false if value is not found
   const contains = function (defaultValue) {
-    const value = defaultValue.toLowerCase();
+    const value =
+      typeof defaultValue === "string"
+        ? defaultValue.toLowerCase()
+        : defaultValue;
     const data = count.call(this, undefined, value);
     const recievedValue = data.node.value();
-    const lowerCaseValue = recievedValue.toLowerCase();
+    const lowerCaseValue =
+      typeof defaultValue === "string"
+        ? recievedValue.toLowerCase()
+        : recievedValue;
     return lowerCaseValue === value ? true : false;
   };
 
