@@ -1,6 +1,6 @@
 {
   "name": "@reza2022/linked-list",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "make a linked list using this package",
   "main": "app.js",
   "scripts": {
