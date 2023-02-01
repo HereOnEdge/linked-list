@@ -144,7 +144,11 @@ function node(nodeData, nextNode, prevNode) {
 
 // build a function to crawl into the linkedList and display every node
 function runLinkedList(node) {
-  console.log(`data = ${node.value()}`);
+  if (typeof node.value() === "object") {
+    console.log(`data = ${JSON.stringify(node.value())}`);
+  } else {
+    console.log(`data = ${node.value()}`);
+  }
   if (node.next === null) {
     return;
   }
