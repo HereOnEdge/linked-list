@@ -64,7 +64,11 @@ function linkedList(headNode, tailNode = null) {
         ? defaultValue.toLowerCase()
         : defaultValue;
     const data = count.call(this, undefined, value);
-    const recievedValue = data.node.value();
+    let recievedValue = data.node.value();
+    if (typeof value === "object") {
+      recievedValue = JSON.stringify(data.node.value());
+      value = JSON.stringify(value);
+    }
     const lowerCaseValue =
       typeof defaultValue === "string"
         ? recievedValue.toLowerCase()
