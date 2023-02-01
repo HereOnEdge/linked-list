@@ -76,7 +76,9 @@ function linkedList(headNode, tailNode = null) {
   const find = function (value) {
     const data = count.call(this, undefined, value);
     const recievedValue = data.node.value();
-    return recievedValue === value ? data.node : null;
+    return JSON.stringify(recievedValue) === JSON.stringify(value)
+      ? data.node
+      : null;
   };
 
   // function findIndex, gets a value and returns the index of the given value inside the linkedList, returns null if the value is not found
@@ -84,7 +86,9 @@ function linkedList(headNode, tailNode = null) {
     const data = count.call(this, undefined, value);
     const recievedValue = data.node.value();
     const recievedIndex = data.i;
-    return recievedValue === value ? recievedIndex : null;
+    return JSON.stringify(recievedValue) === JSON.stringify(value)
+      ? recievedIndex
+      : null;
   };
   // function inserAt, gets a value and an index and creates a new Node with the given value and insrets the Node at the given index
   const insertAt = function (value, index) {
@@ -146,9 +150,14 @@ function runLinkedList(node) {
 // make a function to count items insise the list
 function count(ind, val, n = this.head) {
   let i = 0;
-  function __count(node = n, value = val, index = ind) {
+  function __count(
+    node = n,
+    value = typeof val === "object" ? JSON.stringify(val) : val,
+    index = ind
+  ) {
     i++;
-    let nodeValue = node.value();
+    let nodeValue =
+      typeof val === "object" ? JSON.stringify(node.value()) : node.value();
     if (node.next === null || i === index || nodeValue === value) {
       return { i, node };
     }
